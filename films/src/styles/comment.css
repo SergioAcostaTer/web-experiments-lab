@@ -1,0 +1,81 @@
+.commments-title {
+  font-family: "Roboto", sans-serif;
+  margin-bottom: 1vh;
+  margin-top: 3.3vh;
+}
+
+.nocom {
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  color: #4c4c4c;
+}
+
+.comment-ul {
+  margin: 0;
+  padding: 00;
+  width: 80%;
+}
+
+.comment-element {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: #84d2ff;
+  margin: 0 3px 24px 0;
+  padding: 20px;
+  border-radius: 10px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 8px;
+          box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 8px;
+}
+
+.comment-element .comment-user {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  min-width: 150px;
+}
+
+.comment-element .comment-user img {
+  border-radius: 50px;
+  height: 80px;
+  width: 80px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.comment-element .comment-user p {
+  font-family: "Roboto", sans-serif;
+}
+
+.comment-element .comment-content p {
+  font-family: "Roboto", sans-serif;
+  text-align: justify;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+@media (max-width: 700px) {
+  .comment-ul {
+    width: 90%;
+  }
+  .comment-element {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+/*# sourceMappingURL=comment.css.map */

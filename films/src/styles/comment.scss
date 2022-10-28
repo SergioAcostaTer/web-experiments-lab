@@ -1,0 +1,69 @@
+.commments-title{
+    font-family: "Roboto", sans-serif;
+    margin-bottom: 1vh;
+    margin-top: 3.3vh;
+
+}
+.nocom{
+    text-align: center;
+    font-family: "Roboto", sans-serif;
+    color: rgb(76, 76, 76);
+}
+.comment-ul {
+    margin: 0;
+    padding: 00;
+    width: 80%;
+}
+
+.comment-element {
+    display: flex;
+    background-color: #84d2ff;
+    margin: 0 3px 24px 0;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 8px;
+
+    .comment-user {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-width: 150px;
+
+        img {
+            border-radius: 50px;
+            height: 80px;
+            width: 80px;
+            object-fit: cover;
+        }
+
+        p {
+            font-family: "Roboto", sans-serif;
+        }
+    }
+    .comment-content p{
+        font-family: "Roboto", sans-serif;
+        text-align: justify;
+        box-sizing: border-box;
+        margin: 0;
+        line-height: 1.5;
+        word-wrap: break-word
+    }
+}
+
+
+@media (max-width:700px) {
+    .comment-ul {
+        width: 90%;
+    }
+    .comment-element {
+        flex-direction: column;
+
+
+        .comment-user {
+
+
+
+        }
+    }
+}

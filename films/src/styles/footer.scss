@@ -1,0 +1,21 @@
+.footer{
+    height: 20vh;
+    background-color: #009ffd;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px 10px 0 0;
+    .socials{
+        a{
+            text-decoration: none;
+            color: aliceblue;
+            padding: 0 25px;
+            svg{
+                width: 25px;
+                height:25px;
+            }
+
+        }
+    }
+}
