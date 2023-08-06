@@ -109,13 +109,15 @@ class MusicQueue {
   }
 
   playNextSong() {
-    if (this.currentSong < this.songs.length - 1) {
-      this.currentSong++;
+    if (this.currentSong < this.songs.length - 1) {      
       this.socketIO.of(`/${this.roomName}`).emit("songDetails", this.song);
       this.loadSongDetailsForNext();
       console.log(`Now playing in ${this.roomName}: ${this.song.name}`);
     } else {
-      console.log(`No more songs in the queue in ${this.roomName}.`);
+      this.currentSong = 0;
+      this.socketIO.of(`/${this.roomName}`).emit("songDetails", this.song);
+      this.loadSongDetailsForNext();
+      console.log(`Now playing in ${this.roomName}: ${this.song.name}`);
     }
   }
 
