@@ -103,6 +103,7 @@ class MusicQueue {
   }
 
   loadSongDetailsForNext() {
+    console.log("Loading song details for next song");
     if (this.songs.length - this.currentSong < 3) {
       this.loadSong(this.queue[this.currentSong + 1]);
     }

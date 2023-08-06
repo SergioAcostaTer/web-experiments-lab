@@ -1,4 +1,3 @@
-const { Server } = require("socket.io");
 const MusicQueue = require("./MusicQueue");
 
 class Room {
@@ -35,7 +34,7 @@ class Room {
     console.log(`Created namespace: ${this.roomName}`);
 
     roomNamespace.on("connection", (socket) => {
-      console.log(`Users in ${this.roomName}: ${this.users}`);
+      // console.log(`Users in ${this.roomName}: ${this.users}`);
 
       socket.emit("songDetails", this.musicQueue.song);
 
@@ -49,8 +48,8 @@ class Room {
 
       // Handle user disconnecting from the room
       socket.on("disconnect", () => {
-        console.log(`Users in ${this.roomName}: ${this.users}`);
-        console.log(`User disconnected from room: ${this.roomName}`);
+        // console.log(`Users in ${this.roomName}: ${this.users}`);
+        // console.log(`User disconnected from room: ${this.roomName}`);
       });
     });
   }
