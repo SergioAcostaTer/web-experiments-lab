@@ -16,9 +16,11 @@
     "express": "4.18.2",
     "mongoose": "7.4.2",
     "node-cron": "^3.0.2",
+    "node-fetch": "^3.3.2",
     "nodemon": "3.0.1",
     "sergio-ytsr": "^0.0.0-development",
     "socket.io": "4.7.2",
+    "url-status-code": "^2.0.0",
     "ytdl-core": "4.11.5"
   },
   "engines": {

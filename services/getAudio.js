@@ -1,7 +1,7 @@
 // ./services/getAudio.js
 const ytdl = require("ytdl-core");
 const ytsr = require("sergio-ytsr");
-const { default: axios } = require("axios");
+const urlStatusCode = require("url-status-code");
 
 async function getAudio(name, artists, cover, spotifyDuration) {
   const searchResults = await ytsr(name, { limit: 10, safeSearch: false });
@@ -33,25 +33,17 @@ async function getAudio(name, artists, cover, spotifyDuration) {
   const orderedByBitrate = onlyAudio.sort((a, b) => b.bitrate - a.bitrate);
 
   let url = orderedByBitrate[0].url;
-  let urlStatus = 0;
 
-  //check if url page 200 status
-  try {
-    const response = await axios.head(url);
-    urlStatus = response.status;
-    console.log(urlStatus);
-  } catch (error) {
-    console.log(error);
-  }
+  const status = await urlStatusCode(url);
 
   const audioDetails = {
     name: name,
     artists: artists.map((artist) => artist.name),
     url: url,
-    urlStatus: urlStatus,
     duration: audioInfo.videoDetails.lengthSeconds,
     cover: cover,
     currentTime: 0,
+    status: status,
   };
 
   return audioDetails;
