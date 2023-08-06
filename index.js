@@ -14,9 +14,15 @@ const Room = require("./Room");
 app.use(cors());
 
 
+// const socketIO = require("socket.io")(http, {
+//   cors: {
+//     origin: ["http://192.168.56.1:5173", "http://192.168.1.133:5173", "https://random-radio-front.vercel.app"],
+//   },
+// });
+
 const socketIO = require("socket.io")(http, {
   cors: {
-    origin: ["http://192.168.56.1:5173", "http://192.168.1.133:5173", "https://random-radio-front.vercel.app"],
+    orign: "*",
   },
 });
 
