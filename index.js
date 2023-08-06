@@ -30,12 +30,6 @@ cron.schedule("*/10 * * * *", () => {
   //make request to keep render alive to
   axios
     .get("https://random-radio-back.herokuapp.com/")
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
 });
 
 const room1 = new Room("room1", "0VrX5i1GIjHzqXelLP3pfH", socketIO);

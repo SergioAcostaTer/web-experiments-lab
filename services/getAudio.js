@@ -35,37 +35,18 @@ async function getAudio(name, artists, cover, spotifyDuration) {
   let url = orderedByBitrate[0].url;
   let urlStatus = 0;
 
-  let responsee1
-  let responsee2
-
-
   try {
-    const response = await axios.head(url);
-    responsee1 = response.status
+    const response = await axios.get(url);
     urlStatus = response.status;
-    console.log(response.status);
-    if (response.status !== 200 || response.status == 403) {
-      url = orderedByBitrate[1].url;
-      const response2 = await axios.head(url);
-      responsee2 = response2.status
-      urlStatus = response2.status;
-      if (response2.status !== 200 || response2.status == 403) {
-        url = orderedByBitrate[2].url;
-      }
-    }
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    urlStatus = error.response.status;
   }
 
   const audioDetails = {
     name: name,
     artists: artists.map((artist) => artist.name),
     url: url,
-    url1: orderedByBitrate[0].url,
-    url2: orderedByBitrate[1].url,
     urlStatus: urlStatus,
-    responsee1: responsee1,
-    responsee2: responsee2,
     duration: audioInfo.videoDetails.lengthSeconds,
     cover: cover,
     currentTime: 0,
