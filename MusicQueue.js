@@ -64,6 +64,11 @@ class MusicQueue {
           spotifyDuration: parseInt(item.track.duration_ms / 1000),
         };
       });
+
+      //randomize queue
+
+      this.queue.sort(() => Math.random() - 0.5);
+      
     } catch (error) {
       console.error("Error fetching playlist songs:", error);
       throw error;
@@ -110,7 +115,8 @@ class MusicQueue {
   }
 
   playNextSong() {
-    if (this.currentSong < this.songs.length - 1) {      
+    this.currentSong++;
+    if (this.currentSong < this.songs.length) {
       this.socketIO.of(`/${this.roomName}`).emit("songDetails", this.song);
       this.loadSongDetailsForNext();
       console.log(`Now playing in ${this.roomName}: ${this.song.name}`);
