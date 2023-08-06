@@ -35,11 +35,13 @@ async function getAudio(name, artists, cover, spotifyDuration) {
   let url = orderedByBitrate[0].url;
   let urlStatus = 0;
 
+  //check if url page 200 status
   try {
-    const response = await axios.get(url);
+    const response = await axios.head(url);
     urlStatus = response.status;
+    console.log(urlStatus);
   } catch (error) {
-    urlStatus = error.response.status;
+    console.log(error);
   }
 
   const audioDetails = {
