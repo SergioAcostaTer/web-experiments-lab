@@ -85,7 +85,7 @@ class MusicQueue {
         song.name,
         song.artists,
         song.cover,
-        song.spotifyDuration
+        song.spotifyDuration        
       );
       this.songs.push({
         ...song,

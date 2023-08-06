@@ -33,14 +33,16 @@ async function getAudio(name, artists, cover, spotifyDuration) {
   const orderedByBitrate = onlyAudio.sort((a, b) => b.bitrate - a.bitrate);
 
   let url = orderedByBitrate[0].url;
+  let urlStatus = 0;
 
   try {
     const response = await axios.head(url);
+    urlStatus = response.status;
     console.log(response.status);
     if (response.status !== 200 || response.status === 403) {
       url = orderedByBitrate[1].url;
       const response2 = await axios.head(url);
-      console.log(response2.status);
+      urlStatus = response2.status;
       if (response2.status !== 200 || response2.status === 403) {
         url = orderedByBitrate[2].url;
       }
@@ -53,6 +55,7 @@ async function getAudio(name, artists, cover, spotifyDuration) {
     name: name,
     artists: artists.map((artist) => artist.name),
     url: url,
+    urlStatus: urlStatus,
     duration: audioInfo.videoDetails.lengthSeconds,
     cover: cover,
     currentTime: 0,
