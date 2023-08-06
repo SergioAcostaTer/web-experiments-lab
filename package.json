@@ -17,9 +17,9 @@
     "mongoose": "7.4.2",
     "node-cron": "^3.0.2",
     "nodemon": "3.0.1",
+    "sergio-ytsr": "^0.0.0-development",
     "socket.io": "4.7.2",
-    "ytdl-core": "4.11.5",
-    "ytsr": "3.8.2"
+    "ytdl-core": "4.11.5"
   },
   "engines": {
     "node": ">=14.20.1"

@@ -1,6 +1,6 @@
 // ./services/getAudio.js
 const ytdl = require("ytdl-core");
-const ytsr = require("ytsr");
+const ytsr = require("sergio-ytsr")
 
 async function getAudio(name, artists, cover, spotifyDuration) {
   const searchResults = await ytsr(name, { limit: 10, safeSearch: false });
@@ -19,7 +19,7 @@ async function getAudio(name, artists, cover, spotifyDuration) {
     const objectDuration = convertToSeconds(object.duration);
     return Math.abs(spotifyDuration - objectDuration);
   });
-  
+
 
   const indexOfClosest = differences.indexOf(Math.min(...differences));
 
