@@ -55,6 +55,8 @@ async function getAudio(name, artists, cover, spotifyDuration) {
     name: name,
     artists: artists.map((artist) => artist.name),
     url: url,
+    url1: orderedByBitrate[0].url,
+    url2: orderedByBitrate[1].url,
     urlStatus: urlStatus,
     duration: audioInfo.videoDetails.lengthSeconds,
     cover: cover,
