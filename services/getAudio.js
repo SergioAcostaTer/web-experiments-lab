@@ -7,7 +7,7 @@ async function getAudio(name, artists, cover, spotifyDuration) {
   const searchResults = await ytsr(name, { limit: 10, safeSearch: false });
 
   const convertToSeconds = (duration) => {
-    const [minutes, seconds] = duration.split(':').map(Number);
+    const [minutes, seconds] = duration.split(":").map(Number);
     return minutes * 60 + seconds;
   };
 
@@ -16,11 +16,10 @@ async function getAudio(name, artists, cover, spotifyDuration) {
       // console.log(`Object at index ${index} doesn't have a duration.`);
       return Infinity; // Set a high difference for invalid objects
     }
-  
+
     object.duration = convertToSeconds(object.duration);
     return Math.abs(spotifyDuration - object.duration);
   });
-
 
   const indexOfClosest = differences.indexOf(Math.min(...differences));
 
@@ -28,25 +27,31 @@ async function getAudio(name, artists, cover, spotifyDuration) {
 
   const audioInfo = await ytdl.getInfo(audio.url);
 
-  const onlyAudio = audioInfo.formats.filter((file) => file.mimeType.includes("audio"));
+  const onlyAudio = audioInfo.formats.filter((file) =>
+    file.mimeType.includes("audio")
+  );
   const orderedByBitrate = onlyAudio.sort((a, b) => b.bitrate - a.bitrate);
 
   let url = orderedByBitrate[0].url;
 
-  try{
+  try {
     const response = await axios.head(url);
-    if(response.status !== 200 || response.status === 403){
+    console.log(response.status);
+    if (response.status !== 200 || response.status === 403) {
       url = orderedByBitrate[1].url;
+      const response2 = await axios.head(url);
+      console.log(response2.status);
+      if (response2.status !== 200 || response2.status === 403) {
+        url = orderedByBitrate[2].url;
+      }
     }
-
-  }catch(err){
+  } catch (err) {
     console.log(err);
   }
 
-
   const audioDetails = {
     name: name,
-    artists: artists.map((artist) => artist.name) ,
+    artists: artists.map((artist) => artist.name),
     url: url,
     duration: audioInfo.videoDetails.lengthSeconds,
     cover: cover,
