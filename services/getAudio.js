@@ -35,7 +35,7 @@ async function getAudio(name, artists, cover, spotifyDuration) {
 
   try{
     const response = await axios.head(url);
-    if(response.status !== 200){
+    if(response.status !== 200 || response.status === 403){
       url = orderedByBitrate[1].url;
     }
 
