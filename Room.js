@@ -20,6 +20,10 @@ class Room {
     return this.musicQueue.nextSong;
   }
 
+  get queueP() {
+    return this.musicQueue.queue;
+  }
+
   initialize() {
     this.setupSockets();
     this.musicQueue = new MusicQueue(
@@ -34,11 +38,9 @@ class Room {
     console.log(`Created namespace: ${this.roomName}`);
 
     roomNamespace.on("connection", (socket) => {
-      // console.log(`Users in ${this.roomName}: ${this.users}`);
 
       socket.emit("songDetails", this.musicQueue.song);
 
-      // Handle user sending chat message
       socket.on("newMessage", (message) => {
         roomNamespace.emit("newMessage", {
           user: socket.id,
@@ -46,10 +48,8 @@ class Room {
         });
       });
 
-      // Handle user disconnecting from the room
       socket.on("disconnect", () => {
-        // console.log(`Users in ${this.roomName}: ${this.users}`);
-        // console.log(`User disconnected from room: ${this.roomName}`);
+
       });
     });
   }

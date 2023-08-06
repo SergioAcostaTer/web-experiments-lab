@@ -11,6 +11,7 @@ app.use(express.json());
 const http = require("http").Server(app);
 const cors = require("cors");
 const Room = require("./Room");
+const { getAudio } = require("./services/getAudio");
 app.use(cors());
 
 
@@ -44,22 +45,31 @@ cron.schedule("*/10 * * * *", () => {
 const room1 = new Room("room1", "0VrX5i1GIjHzqXelLP3pfH", socketIO);
 const room2 = new Room("room2", "07MBp1t71mTJfuJvQpkGbN", socketIO);
 const room3 = new Room("room3", "0IepDN73Y0GDNBycm63Ewx", socketIO);
+const room4 = new Room("room4", "0IepDN73Y0GDNBycm63Ewx", socketIO);
+const room5 = new Room("room5", "0IepDN73Y0GDNBycm63Ewx", socketIO);
+const room6 = new Room("room6", "0IepDN73Y0GDNBycm63Ewx", socketIO);
+
+const rooms = [room1, room2, room3, room4, room5, room6];
 
 
 app.get("/api", (req, res) => {
+  const data = rooms.map((room) => {
+    return {
+      roomName: room.roomName,
+      nowPlaying: room.nowPlaying,
+      nextSong: room.nextSong,
+    };
+  });
+  res.json(data);
+});
+
+app.get("/api/:room", (req, res) => {
+  const room = req.params.room;
+  const roomObj = rooms.find((r) => r.roomName === room);
   res.json({
-    room1: {
-      nowPlaying: room1.nowPlaying,
-      nextSong: room1.nextSong,
-    },
-    room2: {
-      nowPlaying: room2.nowPlaying,
-      nextSong: room2.nextSong,
-    },
-    room3: {
-      nowPlaying: room3.nowPlaying,
-      nextSong: room3.nextSong,
-    },
+    nowPlaying: roomObj.nowPlaying,
+    nextSong: roomObj.nextSong,
+    queue: roomObj.queueP,
   });
 });
 

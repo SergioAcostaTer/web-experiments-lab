@@ -65,10 +65,7 @@ class MusicQueue {
         };
       });
 
-      //randomize queue
-
       this.queue.sort(() => Math.random() - 0.5);
-      
     } catch (error) {
       console.error("Error fetching playlist songs:", error);
       throw error;
@@ -105,6 +102,10 @@ class MusicQueue {
 
   get nextSong() {
     return this.songs[this.currentSong + 1];
+  }
+
+  get queueP() {
+    return this.queue;
   }
 
   loadSongDetailsForNext() {
