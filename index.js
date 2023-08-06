@@ -52,7 +52,7 @@ const room6 = new Room("room6", "0IepDN73Y0GDNBycm63Ewx", socketIO);
 const rooms = [room1, room2, room3, room4, room5, room6];
 
 
-app.get("/api", (req, res) => {
+app.get("/", (req, res) => {
   const data = rooms.map((room) => {
     return {
       roomName: room.roomName,
@@ -63,7 +63,7 @@ app.get("/api", (req, res) => {
   res.json(data);
 });
 
-app.get("/api/:room", (req, res) => {
+app.get("/:room", (req, res) => {
   const room = req.params.room;
   const roomObj = rooms.find((r) => r.roomName === room);
   res.json({
