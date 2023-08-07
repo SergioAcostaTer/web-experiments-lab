@@ -108,25 +108,33 @@ class MusicQueue {
     return this.queue;
   }
 
+  //0 + 1 = 1
+  //1 >= 2
+  //loadSong(1)
+  //1 + 1 = 2
+  //2 >= 2
+  //loadSong(0)
+  //0 + 1 = 1
+  //1 >= 2
+  //loadSong(1)
+
+
+
   loadSongDetailsForNext() {
-    console.log("Loading song details for next song");
-    if (this.songs.length - this.currentSong < 3) {
-      this.loadSong(this.queue[this.currentSong + 1]);
+    let songIndexToLoad = this.currentSong;
+    if (songIndexToLoad >= this.songs.length) {
+      songIndexToLoad = songIndexToLoad - this.songs.length;
     }
+
+    this.loadSong(this.queue[songIndexToLoad]);
   }
 
   playNextSong() {
     this.currentSong++;
-    if (this.currentSong < this.songs.length) {
-      this.socketIO.of(`/${this.roomName}`).emit("songDetails", this.song);
-      this.loadSongDetailsForNext();
-      console.log(`Now playing in ${this.roomName}: ${this.song.name}`);
-    } else {
-      this.currentSong = 0;
-      this.socketIO.of(`/${this.roomName}`).emit("songDetails", this.song);
-      this.loadSongDetailsForNext();
-      console.log(`Now playing in ${this.roomName}: ${this.song.name}`);
-    }
+
+    this.socketIO.of(`/${this.roomName}`).emit("songDetails", this.song);
+    this.loadSongDetailsForNext();
+    console.log(`Now playing in ${this.roomName}: ${this.song.name}`);
   }
 
   simulatePlayback() {
