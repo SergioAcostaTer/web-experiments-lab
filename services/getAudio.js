@@ -36,6 +36,12 @@ async function getAudio(name, artists, cover, spotifyDuration) {
   }
 
   const colors = await getColorFromURL(cover);
+
+  const colorHEX = dominantColor
+    .map((c) => c.toString(16).padStart(2, "0"))
+    .join("");
+
+  const colorRGB = `rgb(${colors[0]}, ${colors[1]}, ${colors[2]})`;
     
 
   const orderedByBitrate = onlyAudio.sort((a, b) => b.bitrate - a.bitrate);
@@ -49,7 +55,10 @@ async function getAudio(name, artists, cover, spotifyDuration) {
     duration: audioInfo.videoDetails.lengthSeconds,
     cover: cover,
     currentTime: 0,
-    colors: colors,
+    colors: {
+      hex: colorHEX,
+      rgb: colorRGB,
+    },
   };
 
   return audioDetails;
