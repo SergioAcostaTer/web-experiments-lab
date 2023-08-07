@@ -46,7 +46,7 @@ class Room {
       socket.emit("songDetails", this.musicQueue.song);
 
       socket.on("newMessage", (message) => {
-        roomNamespace.emit("newMessage", {
+        socket.emit("newMessage", {
           user: socket.id,
           message: message.message,
         });
