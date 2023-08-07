@@ -47,14 +47,14 @@ class Room {
         console.log(`Someone joined ${this.roomName}`);
         this.users++;
 
-        // socket.emit("userCount", this.users);
+        socket.emit("userCount", this.users);
       });
 
       socket.on("leaveRoom", () => {
         console.log(`Someone left ${this.roomName}`);
         this.users--;
 
-        // socket.emit("userCount", this.users);        
+        socket.emit("userCount", this.users);        
       });
 
       socket.emit("songDetails", this.musicQueue.song);
