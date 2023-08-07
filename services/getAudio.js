@@ -37,7 +37,7 @@ async function getAudio(name, artists, cover, spotifyDuration) {
 
   const colors = await getColorFromURL(cover);
 
-  const colorHEX = dominantColor
+  const colorHEX = colors
     .map((c) => c.toString(16).padStart(2, "0"))
     .join("");
 
