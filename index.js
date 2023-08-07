@@ -12,7 +12,6 @@ app.use(express.json());
 
 const http = require("http").Server(app);
 const cors = require("cors");
-const urlStatusCode = require("url-status-code");
 app.use(cors());
 
 const socketIO = require("socket.io")(http, {
