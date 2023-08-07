@@ -47,7 +47,7 @@ class Room {
 
       socket.on("newMessage", (message) => {
         console.log("New message:", message);
-        socket.emit("newMessage", {
+        roomNamespace.emit("newMessage", {
           user: socket.id,
           message: message.message,
         });
