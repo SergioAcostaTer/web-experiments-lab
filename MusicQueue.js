@@ -110,9 +110,9 @@ class MusicQueue {
 
   loadSongDetailsForNext() {
     console.log("Loading song details for next song");
-    const nextSongIndex = (this.currentSong + 1) % this.songs.length;
-
-    this.loadSong(this.queue[nextSongIndex]);
+    if (this.songs.length - this.currentSong < 3) {
+      this.loadSong(this.queue[this.currentSong + 1]);
+    }
   }
 
   playNextSong() {
