@@ -1,5 +1,6 @@
 const ytdl = require("ytdl-core");
 const ytsr = require("sergio-ytsr");
+const { getColorFromURL } = require("color-thief-node");
 
 
 async function getAudio(name, artists, cover, spotifyDuration) {
@@ -34,9 +35,12 @@ async function getAudio(name, artists, cover, spotifyDuration) {
     return null;
   }
 
+  const colors = getColorFromURL(cover);
+    
+
   const orderedByBitrate = onlyAudio.sort((a, b) => b.bitrate - a.bitrate);
 
-  let url = orderedByBitrate[0].url;
+  const url = orderedByBitrate[0].url;
 
   const audioDetails = {
     name: name,
@@ -45,6 +49,7 @@ async function getAudio(name, artists, cover, spotifyDuration) {
     duration: audioInfo.videoDetails.lengthSeconds,
     cover: cover,
     currentTime: 0,
+    colors: colors,
   };
 
   return audioDetails;
