@@ -24,6 +24,10 @@ class Room {
     return this.musicQueue.queue;
   }
 
+  get songs() {
+    return this.musicQueue.songs;
+  }
+
   initialize() {
     this.setupSockets();
     this.musicQueue = new MusicQueue(

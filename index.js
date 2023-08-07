@@ -44,9 +44,9 @@ const rooms = [room1, room2, room3, room4, room5, room6];
 app.get("/", (req, res) => {
   const data = rooms.map((room) => {
     return {
-      roomName: room.roomName,
-      nowPlaying: room.nowPlaying,
-      nextSong: room.nextSong,
+      roomName: room?.roomName,
+      nowPlaying: room?.nowPlaying,
+      nextSong: room?.nextSong,
     };
   });
   res.json(data);
@@ -56,9 +56,10 @@ app.get("/:room", (req, res) => {
   const room = req.params.room;
   const roomObj = rooms.find((r) => r.roomName === room);
   res.json({
-    nowPlaying: roomObj.nowPlaying,
-    nextSong: roomObj.nextSong,
-    queue: roomObj.queueP,
+    nowPlaying: roomObj?.nowPlaying,
+    nextSong: roomObj?.nextSong,
+    queue: roomObj?.queueP,
+    songs: roomObj?.musicQueue.songs,
   });
 });
 
