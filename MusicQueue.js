@@ -17,7 +17,6 @@ class MusicQueue {
   }
 
   async initialize() {
-    console.log(this.spotifyPlaylistID);
     try {
       await this.getPlaylistSongs();
       await this.loadInitialSongDetails();
@@ -125,8 +124,6 @@ class MusicQueue {
     if (songIndexToLoad >= this.queue.length) {
       songIndexToLoad = songIndexToLoad - this.queue.length;
     }
-
-    console.log("Loading song details for next song:", songIndexToLoad, this.queue.length);
 
     this.loadSong(this.queue[songIndexToLoad]);
   }
