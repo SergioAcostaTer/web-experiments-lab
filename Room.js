@@ -45,7 +45,7 @@ class Room {
 
       socket.on("skipSong", () => {
         console.log(`Skipping song in ${this.roomName}`);
-        this.musicQueue.playNextSong();
+        // this.musicQueue.playNextSong();
       });
 
       socket.on("joinRoom", () => {
