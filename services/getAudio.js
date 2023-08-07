@@ -35,7 +35,7 @@ async function getAudio(name, artists, cover, spotifyDuration) {
     return null;
   }
 
-  const colors = getColorFromURL(cover);
+  const colors = await getColorFromURL(cover);
     
 
   const orderedByBitrate = onlyAudio.sort((a, b) => b.bitrate - a.bitrate);
