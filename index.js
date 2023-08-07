@@ -27,7 +27,9 @@ const socketIO = require("socket.io")(http, {
 
 cron.schedule("*/10 * * * *", () => {
   //make request to keep render alive to
-  axios.get("https://random-radio-back.onrender.com/");
+  axios.get("https://random-radio-back.onrender.com/").then((res) => {
+    console.log("Kept render alive " + new Date().toISOString() );
+  });
 });
 
 const room1 = new Room("room1", "4ZKbjyAVy4CXfe0R6pMhVf", socketIO);
