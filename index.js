@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const cron = require("node-cron");
+const axios = require("axios");
 require("dotenv").config();
 
 const Room = require("./Room");
@@ -28,9 +29,10 @@ const socketIO = require("socket.io")(http, {
 cron.schedule("*/10 * * * *", () => {
   //make request to keep render alive to
   axios.get("https://random-radio-back.onrender.com/").then((res) => {
-    console.log("Kept render alive " + new Date().toISOString() );
+    console.log(res.data);
   });
 });
+
 
 const room1 = new Room("room1", "4ZKbjyAVy4CXfe0R6pMhVf", socketIO);
 const room2 = new Room("room2", "07MBp1t71mTJfuJvQpkGbN", socketIO);
