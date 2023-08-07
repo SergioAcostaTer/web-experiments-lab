@@ -43,18 +43,19 @@ class Room {
     roomNamespace.on("connection", (socket) => {
       console.log(`User connected to ${this.roomName}`);
 
-      socket.on("joinRoom", (username) => {
-        console.log(`${username} joined ${this.roomName}`);
+      socket.on("joinRoom", () => {
+        console.log(`Someone joined ${this.roomName}`);
         this.users++;
 
         // socket.emit("userCount", this.users);
       });
 
-      // socket.on("leaveRoom", (username) => {
-      //   console.log(`${username} left ${this.roomName}`);
-      //   this.users--;
-      //   socket.emit("userCount", this.users);
-      // });
+      socket.on("leaveRoom", () => {
+        console.log(`Someone left ${this.roomName}`);
+        this.users--;
+
+        // socket.emit("userCount", this.users);        
+      });
 
       socket.emit("songDetails", this.musicQueue.song);
 
