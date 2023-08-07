@@ -43,6 +43,11 @@ class Room {
     roomNamespace.on("connection", (socket) => {
       console.log(`User connected to ${this.roomName}`);
 
+      socket.on("skipSong", () => {
+        console.log(`Skipping song in ${this.roomName}`);
+        this.musicQueue.playNextSong();
+      });
+
       socket.on("joinRoom", () => {
         console.log(`Someone joined ${this.roomName}`);
         this.users++;
