@@ -136,7 +136,7 @@ class MusicQueue {
 
     this.socketIO.of(`/${this.roomName}`).emit("songDetails", this.song);
     this.loadSongDetailsForNext();
-    console.log(`Now playing in ${this.roomName}: ${this.song.name}`);
+    console.log(`Now playing in ${this.roomName}: ${this.song?.name}`);
   }
 
   simulatePlayback() {
