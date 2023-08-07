@@ -1,6 +1,7 @@
 const ytdl = require("ytdl-core");
 const ytsr = require("sergio-ytsr");
 const { getColorFromURL } = require("color-thief-node");
+const streamToBlob = require("stream-to-blob");
 
 
 async function getAudio(name, artists, cover, spotifyDuration) {
@@ -24,16 +25,28 @@ async function getAudio(name, artists, cover, spotifyDuration) {
 
   const audio = searchResults.items[indexOfClosest];
 
-  const audioInfo = await ytdl.getInfo(audio.url);
+  // const audioInfo = await ytdl.getInfo(audio.url);
 
-  const onlyAudio = audioInfo.formats.filter((file) =>
-    file.mimeType.includes("audio")
-  );
+  // const onlyAudio = audioInfo.formats.filter((file) =>
+  //   file.mimeType.includes("audio")
+  // );
 
-  if (onlyAudio.length === 0) {
-    console.error("No audio formats available:", name);
-    return null;
-  }
+  // if (onlyAudio.length === 0) {
+  //   console.error("No audio formats available:", name);
+  //   return null;
+  // }
+
+  const stream = await ytdl(audio.url, {
+    format: "mp3",
+    quality: "highestaudio",
+    });
+
+    const blob = await streamToBlob(stream);
+  const base64 = await blob.arrayBuffer().then((buffer) => {
+    return Buffer.from(buffer).toString("base64");
+  });
+
+    // console.log(audioFile)
 
   const colors = await getColorFromURL(cover);
 
@@ -44,15 +57,18 @@ async function getAudio(name, artists, cover, spotifyDuration) {
   const colorRGB = `rgb(${colors[0]}, ${colors[1]}, ${colors[2]})`;
     
 
-  const orderedByBitrate = onlyAudio.sort((a, b) => b.bitrate - a.bitrate);
+  // const orderedByBitrate = onlyAudio.sort((a, b) => b.bitrate - a.bitrate);
 
-  const url = orderedByBitrate[0].url;
+  // const url = orderedByBitrate[0].url;
+
+
+
 
   const audioDetails = {
     name: name,
     artists: artists.map((artist) => artist.name),
-    url: url,
-    duration: audioInfo.videoDetails.lengthSeconds,
+    url: `data:audio/mpeg;base64,${base64}`,
+    duration: audio.duration,
     cover: cover,
     currentTime: 0,
     colors: {

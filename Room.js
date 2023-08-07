@@ -63,6 +63,7 @@ class Room {
       });
 
       socket.emit("songDetails", this.musicQueue.song);
+      socket.emit("songDetailsMin", this.musicQueue.songMin);
 
       socket.on("newMessage", (message) => {
         console.log("New message:", message);

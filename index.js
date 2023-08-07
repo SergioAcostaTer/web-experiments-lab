@@ -6,7 +6,7 @@ require("dotenv").config();
 
 const Room = require("./Room");
 
-const PORT = 4000;
+const PORT = 3000;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -30,7 +30,7 @@ const socketIO = require("socket.io")(http, {
 cron.schedule("*/10 * * * *", () => {
   //make request to keep render alive to
   axios.get("https://random-radio-back.onrender.com/").then((res) => {
-    console.log(res.data);
+    console.log("Stay alive at " + new Date().toISOString());
   });
 });
 

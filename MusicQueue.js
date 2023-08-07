@@ -99,6 +99,19 @@ class MusicQueue {
     return this.songs[this.currentSong];
   }
 
+  get songMin() {
+    const actual = this.songs[this.currentSong];
+    return {
+      name: actual?.name,
+      artists: actual?.artists,
+      cover: actual?.cover,
+      duration: actual?.duration,
+      id: actual?.id,
+      colors: actual?.colors,
+      currentTime: actual?.currentTime,
+    };
+  }
+
   get nextSong() {
     return this.songs[this.currentSong + 1];
   }

@@ -19,6 +19,7 @@
     "nodemon": "3.0.1",
     "sergio-ytsr": "^0.0.0-development",
     "socket.io": "4.7.2",
+    "stream-to-blob": "^2.0.1",
     "ytdl-core": "4.11.5"
   },
   "engines": {
