@@ -85,7 +85,7 @@ class MusicQueue {
         song.name,
         song.artists,
         song.cover,
-        song.spotifyDuration        
+        song.spotifyDuration
       );
       this.songs.push({
         ...song,
@@ -110,9 +110,9 @@ class MusicQueue {
 
   loadSongDetailsForNext() {
     console.log("Loading song details for next song");
-    if (this.songs.length - this.currentSong < 3) {
-      this.loadSong(this.queue[this.currentSong + 1]);
-    }
+    const nextSongIndex = (this.currentSong + 1) % this.songs.length;
+
+    this.loadSong(this.queue[nextSongIndex]);
   }
 
   playNextSong() {
@@ -130,7 +130,7 @@ class MusicQueue {
   }
 
   simulatePlayback() {
-    setInterval(() => {
+    const simulate = () => {
       const currentSong = this.song;
       if (currentSong) {
         currentSong.currentTime += 1;
@@ -138,7 +138,11 @@ class MusicQueue {
           this.playNextSong();
         }
       }
-    }, 1000);
+
+      setTimeout(simulate, 1000); // Schedule the next iteration
+    };
+
+    simulate(); // Start the simulation
   }
 }
 

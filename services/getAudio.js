@@ -1,7 +1,6 @@
-// ./services/getAudio.js
 const ytdl = require("ytdl-core");
 const ytsr = require("sergio-ytsr");
-const urlStatusCode = require("url-status-code");
+
 
 async function getAudio(name, artists, cover, spotifyDuration) {
   const searchResults = await ytsr(name, { limit: 10, safeSearch: false });
@@ -13,7 +12,6 @@ async function getAudio(name, artists, cover, spotifyDuration) {
 
   const differences = searchResults.items.map((object, index) => {
     if (!object.duration) {
-      // console.log(`Object at index ${index} doesn't have a duration.`);
       return Infinity; // Set a high difference for invalid objects
     }
 
@@ -30,22 +28,15 @@ async function getAudio(name, artists, cover, spotifyDuration) {
   const onlyAudio = audioInfo.formats.filter((file) =>
     file.mimeType.includes("audio")
   );
+
+  if (onlyAudio.length === 0) {
+    console.error("No audio formats available:", name);
+    return null;
+  }
+
   const orderedByBitrate = onlyAudio.sort((a, b) => b.bitrate - a.bitrate);
 
   let url = orderedByBitrate[0].url;
-
-  urlStatusCode(url, (err, statusCode) => {
-    if (err) {
-      console.log(err);
-    }
-    if (statusCode === 403) {
-      console.log("Forbidden", name, artists, url);
-      return null;  // If the url is forbidden, return null
-    }
-    
-  });
-
-  console.log("Found audio", name);
 
   const audioDetails = {
     name: name,
@@ -54,7 +45,6 @@ async function getAudio(name, artists, cover, spotifyDuration) {
     duration: audioInfo.videoDetails.lengthSeconds,
     cover: cover,
     currentTime: 0,
-    // status: status,
   };
 
   return audioDetails;

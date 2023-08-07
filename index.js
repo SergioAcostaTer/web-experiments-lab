@@ -21,6 +21,7 @@ const socketIO = require("socket.io")(http, {
       "https://random-radio-front.vercel.app",
       "http://localhost:3000",
       "http://localhost:5173",
+      "http://192.168.0.30:5173", 
     ],
   },
 });
@@ -30,7 +31,7 @@ cron.schedule("*/10 * * * *", () => {
   axios.get("https://random-radio-back.onrender.com/");
 });
 
-const room1 = new Room("room1", "0VrX5i1GIjHzqXelLP3pfH", socketIO);
+const room1 = new Room("room1", "4ZKbjyAVy4CXfe0R6pMhVf", socketIO);
 const room2 = new Room("room2", "07MBp1t71mTJfuJvQpkGbN", socketIO);
 const room3 = new Room("room3", "0IepDN73Y0GDNBycm63Ewx", socketIO);
 const room4 = new Room("room4", "37i9dQZEVXbLRQDuF5jeBp", socketIO);

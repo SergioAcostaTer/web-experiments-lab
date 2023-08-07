@@ -35,9 +35,9 @@ class Room {
 
   setupSockets() {
     const roomNamespace = this.io.of(`/${this.roomName}`);
-    console.log(`Created namespace: ${this.roomName}`);
 
     roomNamespace.on("connection", (socket) => {
+      console.log(`User connected to ${this.roomName}`);
 
       socket.emit("songDetails", this.musicQueue.song);
 
