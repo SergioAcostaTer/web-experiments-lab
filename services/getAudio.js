@@ -34,7 +34,18 @@ async function getAudio(name, artists, cover, spotifyDuration) {
 
   let url = orderedByBitrate[0].url;
 
-  const status = await urlStatusCode(url);
+  urlStatusCode(url, (err, statusCode) => {
+    if (err) {
+      console.log(err);
+    }
+    if (statusCode === 403) {
+      console.log("Forbidden", name, artists, url);
+      return null;  // If the url is forbidden, return null
+    }
+    
+  });
+
+  console.log("Found audio", name);
 
   const audioDetails = {
     name: name,
@@ -43,7 +54,7 @@ async function getAudio(name, artists, cover, spotifyDuration) {
     duration: audioInfo.videoDetails.lengthSeconds,
     cover: cover,
     currentTime: 0,
-    status: status,
+    // status: status,
   };
 
   return audioDetails;
