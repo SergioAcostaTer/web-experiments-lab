@@ -4,8 +4,8 @@ const { getColorFromURL } = require("color-thief-node");
 
 
 async function getAudio(name, artists, cover, spotifyDuration) {
-  const searchResults = await ytsr(name, { limit: 10, safeSearch: false });
-
+  const searchResults = await ytsr(`${name} ${artists[0].name}`, { limit: 10, type: "video", safeSearch: false })
+  
   const convertToSeconds = (duration) => {
     const [minutes, seconds] = duration.split(":").map(Number);
     return minutes * 60 + seconds;

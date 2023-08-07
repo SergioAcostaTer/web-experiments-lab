@@ -13,6 +13,7 @@ app.use(express.json());
 
 const http = require("http").Server(app);
 const cors = require("cors");
+const ytsr = require("sergio-ytsr");
 app.use(cors());
 
 const socketIO = require("socket.io")(http, {
@@ -64,6 +65,15 @@ app.get("/:room", (req, res) => {
     songs: roomObj?.musicQueue.songs,
   });
 });
+
+// app.get("/search/:query", (req, res) => {
+//   const query = req.params.query;
+
+//   //search youtube for query, only videos
+//   ytsr(query, { limit: 10, type: "video" }).then((result) => {
+//     res.json(result.items);
+//   });
+// });
 
 http.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
