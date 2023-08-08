@@ -69,6 +69,8 @@ const roomsInfo = [
     roomName: "room6",
     spotifyPlaylistID: "37i9dQZEVXbNFJfN1Vw8d9",
     title: "Top 50 España 🇪🇪🇸🇪🇸"
+  },
+];
 
 
 */
