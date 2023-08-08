@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 const cron = require("node-cron");
 const axios = require("axios");
-require("dotenv").config();
 
 const Room = require("./Room");
 
