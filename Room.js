@@ -42,6 +42,9 @@ class Room {
 
     roomNamespace.on("connection", (socket) => {
       console.log(`User connected to ${this.roomName}`);
+      
+      socket.emit("songDetailsMin", this.musicQueue.songMin);
+      socket.emit("songDetails", this.musicQueue.song);
 
       socket.on("skipSong", () => {
         console.log(`Skipping song in ${this.roomName}`);
@@ -59,11 +62,8 @@ class Room {
         console.log(`Someone left ${this.roomName}`);
         this.users--;
 
-        socket.emit("userCount", this.users);        
+        socket.emit("userCount", this.users);
       });
-
-      socket.emit("songDetails", this.musicQueue.song);
-      socket.emit("songDetailsMin", this.musicQueue.songMin);
 
       socket.on("newMessage", (message) => {
         console.log("New message:", message);
@@ -73,9 +73,7 @@ class Room {
         });
       });
 
-      socket.on("disconnect", () => {
-
-      });
+      socket.on("disconnect", () => {});
     });
   }
 }
