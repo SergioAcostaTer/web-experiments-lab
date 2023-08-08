@@ -47,8 +47,8 @@ cron.schedule("*/10 * * * *", () => {
 const roomsInfo = [
   {
     roomName: "room1",
-    spotifyPlaylistID: "4ZKbjyAVy4CXfe0R6pMhVf",
-    title: "Just Testing",
+    spotifyPlaylistID: "37i9dQZF1DX6XNIZUM3SKi",
+    title: "Barça Tour 2023⚽",
   },
   {
     roomName: "room2",    
@@ -80,7 +80,7 @@ const roomsInfo = [
 
 */
 
-const room1 = new Room("room1", "4Wmggq0IBu8ZPHyjt2rLdL", socketIO);
+const room1 = new Room("room1", "37i9dQZF1DX6XNIZUM3SKi", socketIO);
 const room2 = new Room("room2", "07MBp1t71mTJfuJvQpkGbN", socketIO);
 const room3 = new Room("room3", "0IepDN73Y0GDNBycm63Ewx", socketIO);
 const room4 = new Room("room4", "37i9dQZEVXbLRQDuF5jeBp", socketIO);
@@ -93,8 +93,8 @@ app.get("/", (req, res) => {
   const data = rooms.map((room) => {
     return {
       roomName: room?.roomName,
-      nowPlaying: room?.musicQueue.songMin,
-      nextSong: room?.musicQueue.nextSongMin,
+      nowPlaying: room?.musicQueue.song,
+      nextSong: room?.musicQueue.nextSong,
     };
   });
   res.json(data);
@@ -104,8 +104,8 @@ app.get("/:room", (req, res) => {
   const room = req.params.room;
   const roomObj = rooms.find((r) => r.roomName === room);
   res.json({
-    nowPlaying: roomObj?.musicQueue.songMin,
-    nextSong: roomObj?.musicQueue.nextSongMin,
+    nowPlaying: roomObj?.musicQueue.song,
+    nextSong: roomObj?.musicQueue.nextSong,
     queue: roomObj?.queueP,
     songs: roomObj?.musicQueue.songs,
   });

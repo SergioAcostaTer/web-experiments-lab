@@ -43,7 +43,6 @@ class Room {
     roomNamespace.on("connection", (socket) => {
       console.log(`User connected to ${this.roomName}`);
       
-      socket.emit("songDetailsMin", this.musicQueue.songMin);
       socket.emit("songDetails", this.musicQueue.song);
 
       socket.on("skipSong", () => {

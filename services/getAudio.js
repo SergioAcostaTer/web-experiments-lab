@@ -1,7 +1,5 @@
-const ytdl = require("ytdl-core");
 const ytsr = require("sergio-ytsr");
-const { getColorFromURL } = require("color-thief-node");
-const streamToBlob = require("stream-to-blob");
+const { getColorFromURL, getPaletteFromURL } = require("color-thief-node");
 
 
 async function getAudio(name, artists, cover, spotifyDuration) {
@@ -30,14 +28,15 @@ async function getAudio(name, artists, cover, spotifyDuration) {
   const audio = searchResults.items[indexOfClosest];
 
 
-  const colors = await getColorFromURL(cover);
+  const palette = await getPaletteFromURL(cover, 3);
 
-  const colorHEX = colors
-    .map((c) => c.toString(16).padStart(2, "0"))
-    .join("");
 
-  const colorRGB = `rgb(${colors[0]}, ${colors[1]}, ${colors[2]})`;
-
+  let colorPalette = palette.map((color) => {
+    return {
+      hex: `#${color.map((c) => c.toString(16).padStart(2, "0")).join("")}`,
+      rgb: `rgb(${color[0]}, ${color[1]}, ${color[2]})`,
+    };
+  });
 
   const audioDetails = {
     name: name,
@@ -45,11 +44,8 @@ async function getAudio(name, artists, cover, spotifyDuration) {
     duration: audio.duration,
     cover: cover,
     currentTime: 0,
-    colors: {
-      hex: colorHEX,
-      rgb: colorRGB,
-    },
-    url: audio.url,
+    colors: colorPalette,
+    url: audio.url, 
   };
 
   const t1 = performance.now();
