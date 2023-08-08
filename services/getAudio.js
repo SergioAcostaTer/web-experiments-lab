@@ -40,18 +40,13 @@ async function getAudio(name, artists, cover, spotifyDuration) {
   //   return Buffer.from(buffer).toString("base64");
   // });
 
-  const audioInfo = await ytdl.getInfo(audio.url);
+  const audioInfo = await ytdl.getInfo(audio.url, {
+    format: "mp3",
+    });
 
-  const audioFormats = ytdl.filterFormats(audioInfo.formats, "audioonly");
-
-  const audioFormat = ytdl.chooseFormat(audioFormats, { quality: "highestaudio" });
+  const audioFormat = ytdl.chooseFormat(audioInfo, { quality: "highestaudio" });
 
   const audioUrl = audioFormat.url;
-
-
-
-
-
 
 
   const colors = await getColorFromURL(cover);

@@ -164,7 +164,7 @@ class MusicQueue {
     this.songs.shift();
 
     this.socketIO.of(`/${this.roomName}`).emit("songDetailsMin", this.song);
-    this.socketIO.of(`/${this.roomName}`).emit("songDetails", this.nextSong);
+    this.socketIO.of(`/${this.roomName}`).emit("songDetails", this.song);
     await this.loadSongDetailsForNext();
     console.log(`Now playing in ${this.roomName}: ${this.song?.name}`);
   }
