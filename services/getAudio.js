@@ -40,11 +40,11 @@ async function getAudio(name, artists, cover, spotifyDuration) {
   //   return Buffer.from(buffer).toString("base64");
   // });
 
-  const audioInfo = await ytdl.getInfo(audio.url, {
-    format: "mp3",
-    });
+  const audioInfo = await ytdl.getInfo(audio.url);
 
-  const audioFormat = ytdl.chooseFormat(audioInfo, { quality: "highestaudio" });
+  const audioFormat = ytdl.chooseFormat(audioInfo.formats, {
+    quality: "highestaudio",
+  });
 
   const audioUrl = audioFormat.url;
 
