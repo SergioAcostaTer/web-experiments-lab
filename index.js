@@ -21,7 +21,7 @@ app.use(cors());
 //       "https://random-radio-front.vercel.app",
 //       "http://localhost:3000",
 //       "http://localhost:5173",
-//       "http://192.168.0.30:5173", 
+//       "http://192.168.0.30:5173",
 //     ],
 //   },
 // });
@@ -39,31 +39,30 @@ cron.schedule("*/10 * * * *", () => {
   });
 });
 
-
 //multiline comment
 
-/*
+
 
 const roomsInfo = [
   {
     roomName: "room1",
-    spotifyPlaylistID: "37i9dQZF1DX6XNIZUM3SKi",
-    title: "Barça Tour 2023⚽",
+    spotifyPlaylistID: "37i9dQZF1DXcBWIGoYBM5M",
+    title: "Today's Top Hits 🎧"
   },
   {
-    roomName: "room2",    
-    spotifyPlaylistID: "07MBp1t71mTJfuJvQpkGbN",
-    title: "Full Latinos",
+    roomName: "room2",
+    spotifyPlaylistID: "37i9dQZF1DX0XUsuxWHRQd",
+    title: "RapCaviar 🎤"
   },
   {
     roomName: "room3",
-    spotifyPlaylistID: "0IepDN73Y0GDNBycm63Ewx",
-    title: "RULETA ESCOPETA 🔫🥖",
+    spotifyPlaylistID: "37i9dQZF1DX10zKzsJ2jva",
+    title: "Viva Latino! 🎉"
   },
   {
     roomName: "room4",
-    spotifyPlaylistID: "37i9dQZEVXbLRQDuF5jeBp",
-    title: "Top 50 EE.UU 🔫"
+    spotifyPlaylistID: "37i9dQZF1DX4o1oenSJRJd",
+    title: "All Out 00s 🎧"
   },
   {
     roomName: "room5",
@@ -72,22 +71,44 @@ const roomsInfo = [
   },
   {
     roomName: "room6",
-    spotifyPlaylistID: "37i9dQZEVXbNFJfN1Vw8d9",
-    title: "Top 50 España 🇪🇪🇸🇪🇸"
+    spotifyPlaylistID: "37i9dQZEVXbLRQDuF5jeBp",
+    title: "Top 50 EE.UU 🔫"
   },
+  {
+    roomName: "room7",
+    spotifyPlaylistID: "37i9dQZEVXbNFJfN1Vw8d9",
+    title: "Top 50 España 🇪🇸🇪🇸"
+  },
+  {
+    roomName: "room8",
+    spotifyPlaylistID: "37i9dQZF1DX6XNIZUM3SKi",
+    title: "Barça Tour 2023⚽",
+  },
+  {
+    roomName: "room9",    
+    spotifyPlaylistID: "07MBp1t71mTJfuJvQpkGbN",
+    title: "Full Latinos",
+  },
+  {
+    roomName: "room10",
+    spotifyPlaylistID: "0IepDN73Y0GDNBycm63Ewx",
+    title: "RULETA ESCOPETA 🔫🥖",
+  }
 ];
 
 
-*/
+const room1 = new Room(roomsInfo[0].roomName, roomsInfo[0].spotifyPlaylistID, socketIO);
+const room2 = new Room(roomsInfo[1].roomName, roomsInfo[1].spotifyPlaylistID, socketIO);
+const room3 = new Room(roomsInfo[2].roomName, roomsInfo[2].spotifyPlaylistID, socketIO);
+const room4 = new Room(roomsInfo[3].roomName, roomsInfo[3].spotifyPlaylistID, socketIO);
+const room5 = new Room(roomsInfo[4].roomName, roomsInfo[4].spotifyPlaylistID, socketIO);
+const room6 = new Room(roomsInfo[5].roomName, roomsInfo[5].spotifyPlaylistID, socketIO);
+const room7 = new Room(roomsInfo[6].roomName, roomsInfo[6].spotifyPlaylistID, socketIO);
+const room8 = new Room(roomsInfo[7].roomName, roomsInfo[7].spotifyPlaylistID, socketIO);
+const room9 = new Room(roomsInfo[8].roomName, roomsInfo[8].spotifyPlaylistID, socketIO);
+const room10= new Room(roomsInfo[9].roomName, roomsInfo[9].spotifyPlaylistID, socketIO);
 
-const room1 = new Room("room1", "37i9dQZF1DX6XNIZUM3SKi", socketIO);
-const room2 = new Room("room2", "07MBp1t71mTJfuJvQpkGbN", socketIO);
-const room3 = new Room("room3", "0IepDN73Y0GDNBycm63Ewx", socketIO);
-const room4 = new Room("room4", "37i9dQZEVXbLRQDuF5jeBp", socketIO);
-const room5 = new Room("room5", "37i9dQZEVXbMDoHDwVN2tF", socketIO);
-const room6 = new Room("room6", "37i9dQZEVXbNFJfN1Vw8d9", socketIO);
-
-const rooms = [room1, room2, room3, room4, room5, room6];
+const rooms = [room1, room2, room3, room4, room5, room6, room7, room8, room9, room10];
 
 app.get("/", (req, res) => {
   const data = rooms.map((room) => {
