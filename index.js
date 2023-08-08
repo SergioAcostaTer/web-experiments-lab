@@ -16,14 +16,20 @@ const cors = require("cors");
 const ytsr = require("sergio-ytsr");
 app.use(cors());
 
+// const socketIO = require("socket.io")(http, {
+//   cors: {
+//     origin: [
+//       "https://random-radio-front.vercel.app",
+//       "http://localhost:3000",
+//       "http://localhost:5173",
+//       "http://192.168.0.30:5173", 
+//     ],
+//   },
+// });
+
 const socketIO = require("socket.io")(http, {
   cors: {
-    origin: [
-      "https://random-radio-front.vercel.app",
-      "http://localhost:3000",
-      "http://localhost:5173",
-      "http://192.168.0.30:5173", 
-    ],
+    origin: "*",
   },
 });
 
@@ -115,6 +121,6 @@ app.get("/:room", (req, res) => {
 //   });
 // });
 
-app.listen(PORT, () => {
+http.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 });
