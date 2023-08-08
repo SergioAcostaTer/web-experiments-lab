@@ -160,9 +160,9 @@ class MusicQueue {
   }
 
   async playNextSong() {
-    this.currentSong++;
 
-    this.songs[this.currentSong - 1] = null;
+    this.songs.shift();
+
 
     this.socketIO.of(`/${this.roomName}`).emit("songDetails", this.song);
     await this.loadSongDetailsForNext();
