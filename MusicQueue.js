@@ -6,6 +6,7 @@ class MusicQueue {
     this.queue = [];
     this.songs = [];
     this.currentSong = 0;
+    this.lastLoadPostion = 0;
     this.spotifyPlaylistID = spotifyPlaylistID;
     this.roomName = roomName;
     this.socketIO = socketIO;
@@ -116,6 +117,19 @@ class MusicQueue {
     return this.songs[this.currentSong + 1];
   }
 
+  get nextSongMin() {
+    const actual = this.songs[this.currentSong + 1];
+    return {
+      name: actual?.name,
+      artists: actual?.artists,
+      cover: actual?.cover,
+      duration: actual?.duration,
+      id: actual?.id,
+      colors: actual?.colors,
+      currentTime: actual?.currentTime,
+    };
+  }
+
   get queueP() {
     return this.queue;
   }
@@ -132,20 +146,26 @@ class MusicQueue {
 
 
 
-  loadSongDetailsForNext() {
-    let songIndexToLoad = this.currentSong + 1;
-    if (songIndexToLoad >= this.queue.length) {
-      songIndexToLoad = songIndexToLoad - this.queue.length;
+  async loadSongDetailsForNext() {
+    
+    this.lastLoadPostion++;
+
+    if (this.lastLoadPostion >= this.queue.length) {
+      this.lastLoadPostion = 0;
     }
 
-    this.loadSong(this.queue[songIndexToLoad]);
+    console.log("Loading next song details:", this.lastLoadPostion, this.queue.length, this.currentSong);
+
+    await this.loadSong(this.queue[this.lastLoadPostion]);
   }
 
-  playNextSong() {
+  async playNextSong() {
     this.currentSong++;
 
+    this.songs[this.currentSong - 1] = null;
+
     this.socketIO.of(`/${this.roomName}`).emit("songDetails", this.song);
-    this.loadSongDetailsForNext();
+    await this.loadSongDetailsForNext();
     console.log(`Now playing in ${this.roomName}: ${this.song?.name}`);
   }
 

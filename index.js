@@ -35,7 +35,19 @@ cron.schedule("*/10 * * * *", () => {
 });
 
 
-const room1 = new Room("room1", "4ZKbjyAVy4CXfe0R6pMhVf", socketIO);
+//multiline comment
+
+/*
+
+const roomsInfo = [
+  {
+    roomName: "room1",
+    spotifyPlaylistID: "4ZKbjyAVy4CXfe0R6pMhVf",
+
+
+*/
+
+const room1 = new Room("room1", "4Wmggq0IBu8ZPHyjt2rLdL", socketIO);
 const room2 = new Room("room2", "07MBp1t71mTJfuJvQpkGbN", socketIO);
 const room3 = new Room("room3", "0IepDN73Y0GDNBycm63Ewx", socketIO);
 const room4 = new Room("room4", "37i9dQZEVXbLRQDuF5jeBp", socketIO);
@@ -48,8 +60,8 @@ app.get("/", (req, res) => {
   const data = rooms.map((room) => {
     return {
       roomName: room?.roomName,
-      nowPlaying: room?.nowPlaying,
-      nextSong: room?.nextSong,
+      nowPlaying: room?.musicQueue.songMin,
+      nextSong: room?.musicQueue.nextSongMin,
     };
   });
   res.json(data);
@@ -59,8 +71,8 @@ app.get("/:room", (req, res) => {
   const room = req.params.room;
   const roomObj = rooms.find((r) => r.roomName === room);
   res.json({
-    nowPlaying: roomObj?.nowPlaying,
-    nextSong: roomObj?.nextSong,
+    nowPlaying: roomObj?.musicQueue.songMin,
+    nextSong: roomObj?.musicQueue.nextSongMin,
     queue: roomObj?.queueP,
     songs: roomObj?.musicQueue.songs,
   });

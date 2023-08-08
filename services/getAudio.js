@@ -25,17 +25,6 @@ async function getAudio(name, artists, cover, spotifyDuration) {
 
   const audio = searchResults.items[indexOfClosest];
 
-  // const audioInfo = await ytdl.getInfo(audio.url);
-
-  // const onlyAudio = audioInfo.formats.filter((file) =>
-  //   file.mimeType.includes("audio")
-  // );
-
-  // if (onlyAudio.length === 0) {
-  //   console.error("No audio formats available:", name);
-  //   return null;
-  // }
-
   const stream = await ytdl(audio.url, {
     format: "mp3",
     quality: "highestaudio",
@@ -46,8 +35,6 @@ async function getAudio(name, artists, cover, spotifyDuration) {
     return Buffer.from(buffer).toString("base64");
   });
 
-    // console.log(audioFile)
-
   const colors = await getColorFromURL(cover);
 
   const colorHEX = colors
@@ -55,13 +42,6 @@ async function getAudio(name, artists, cover, spotifyDuration) {
     .join("");
 
   const colorRGB = `rgb(${colors[0]}, ${colors[1]}, ${colors[2]})`;
-    
-
-  // const orderedByBitrate = onlyAudio.sort((a, b) => b.bitrate - a.bitrate);
-
-  // const url = orderedByBitrate[0].url;
-
-
 
 
   const audioDetails = {
