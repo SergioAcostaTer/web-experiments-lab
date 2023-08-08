@@ -62,13 +62,13 @@ const roomsInfo = [
   },
   {
     roomName: "room5",
-    spotifyPlaylistID: "37i9dQZEVXbMDoHDwVN2tF",
+    spotifyPlaylistID: "37i9dQZEVXbMDoHDwVN2tF",  
     title: "Top 50 Global 🌍"
   },
   {
     roomName: "room6",
     spotifyPlaylistID: "37i9dQZEVXbNFJfN1Vw8d9",
-    title: "Top 50 España 🇪🇸"
+    title: "Top 50 España 🇪🇪🇸🇪🇸"
 
 
 */
