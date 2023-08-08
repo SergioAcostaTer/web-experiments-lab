@@ -115,6 +115,6 @@ app.get("/:room", (req, res) => {
 //   });
 // });
 
-http.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 });
