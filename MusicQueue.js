@@ -117,8 +117,6 @@ class MusicQueue {
       this.lastLoadPostion = 0;
     }
 
-    console.log("Loading next song details:", this.lastLoadPostion, this.queue.length, this.currentSong);
-
     await this.loadSong(this.queue[this.lastLoadPostion]);
   }
 
@@ -126,7 +124,7 @@ class MusicQueue {
 
     this.songs.shift();
 
-    this.socketIO.of(`/${this.roomName}`).emit("songDetails", this.song);
+    this.socketIO.of(`/${this.roomName}`).emit("songDetails", this.songs[0]);
     await this.loadSongDetailsForNext();
     console.log(`Now playing in ${this.roomName}: ${this.song?.name}`);
   }
