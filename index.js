@@ -61,6 +61,7 @@ socketIO.on("connection", (socket) => {
       id: socket.id,
       message: message.message,
       user: message.user,
+      color: message.color,
     });
   });
 
