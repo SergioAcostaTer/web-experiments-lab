@@ -50,27 +50,13 @@ class Room {
         // this.musicQueue.playNextSong();
       });
 
-      socket.on("joinRoom", () => {
-        console.log(`Someone joined ${this.roomName}`);
-        this.users++;
-
-        socket.emit("userCount", this.users);
-      });
-
-      socket.on("leaveRoom", () => {
-        console.log(`Someone left ${this.roomName}`);
-        this.users--;
-
-        socket.emit("userCount", this.users);
-      });
-
-      socket.on("newMessage", (message) => {
-        console.log("New message:", message);
-        roomNamespace.emit("newMessage", {
-          user: socket.id,
-          message: message.message,
-        });
-      });
+      // socket.on("newMessage", (message) => {
+      //   console.log("New message:", message);
+      //   roomNamespace.emit("newMessage", {
+      //     user: socket.id,
+      //     message: message.message,
+      //   });
+      // });
 
       socket.on("disconnect", () => {});
     });

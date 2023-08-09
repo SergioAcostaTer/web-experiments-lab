@@ -41,43 +41,41 @@ cron.schedule("*/10 * * * *", () => {
 
 //multiline comment
 
-
-
 const roomsInfo = [
   {
     roomName: "room1",
     spotifyPlaylistID: "37i9dQZF1DXcBWIGoYBM5M",
-    title: "Today's Top Hits 🎧"
+    title: "Today's Top Hits 🎧",
   },
   {
     roomName: "room2",
     spotifyPlaylistID: "37i9dQZF1DX0XUsuxWHRQd",
-    title: "RapCaviar 🎤"
+    title: "RapCaviar 🎤",
   },
   {
     roomName: "room3",
     spotifyPlaylistID: "37i9dQZF1DX10zKzsJ2jva",
-    title: "Viva Latino! 🎉"
+    title: "Viva Latino! 🎉",
   },
   {
     roomName: "room4",
     spotifyPlaylistID: "37i9dQZF1DX4o1oenSJRJd",
-    title: "All Out 00s 🎧"
+    title: "All Out 00s 🎧",
   },
   {
     roomName: "room5",
-    spotifyPlaylistID: "37i9dQZEVXbMDoHDwVN2tF",  
-    title: "Top 50 Global 🌍"
+    spotifyPlaylistID: "37i9dQZEVXbMDoHDwVN2tF",
+    title: "Top 50 Global 🌍",
   },
   {
     roomName: "room6",
     spotifyPlaylistID: "37i9dQZEVXbLRQDuF5jeBp",
-    title: "Top 50 EE.UU 🔫"
+    title: "Top 50 EE.UU 🔫",
   },
   {
     roomName: "room7",
     spotifyPlaylistID: "37i9dQZEVXbNFJfN1Vw8d9",
-    title: "Top 50 España 🇪🇸🇪🇸"
+    title: "Top 50 España 🇪🇸🇪🇸",
   },
   {
     roomName: "room8",
@@ -85,7 +83,7 @@ const roomsInfo = [
     title: "Barça Tour 2023⚽",
   },
   {
-    roomName: "room9",    
+    roomName: "room9",
     spotifyPlaylistID: "07MBp1t71mTJfuJvQpkGbN",
     title: "Full Latinos",
   },
@@ -103,24 +101,108 @@ const roomsInfo = [
     roomName: "room12",
     spotifyPlaylistID: "37i9dQZF1DX0BcQWzuB7ZO",
     title: "Dance Hits 🕺",
-  }
+  },
 ];
 
+const room1 = new Room(
+  roomsInfo[0].roomName,
+  roomsInfo[0].spotifyPlaylistID,
+  socketIO
+);
+const room2 = new Room(
+  roomsInfo[1].roomName,
+  roomsInfo[1].spotifyPlaylistID,
+  socketIO
+);
+const room3 = new Room(
+  roomsInfo[2].roomName,
+  roomsInfo[2].spotifyPlaylistID,
+  socketIO
+);
+const room4 = new Room(
+  roomsInfo[3].roomName,
+  roomsInfo[3].spotifyPlaylistID,
+  socketIO
+);
+const room5 = new Room(
+  roomsInfo[4].roomName,
+  roomsInfo[4].spotifyPlaylistID,
+  socketIO
+);
+const room6 = new Room(
+  roomsInfo[5].roomName,
+  roomsInfo[5].spotifyPlaylistID,
+  socketIO
+);
+const room7 = new Room(
+  roomsInfo[6].roomName,
+  roomsInfo[6].spotifyPlaylistID,
+  socketIO
+);
+const room8 = new Room(
+  roomsInfo[7].roomName,
+  roomsInfo[7].spotifyPlaylistID,
+  socketIO
+);
+const room9 = new Room(
+  roomsInfo[8].roomName,
+  roomsInfo[8].spotifyPlaylistID,
+  socketIO
+);
+const room10 = new Room(
+  roomsInfo[9].roomName,
+  roomsInfo[9].spotifyPlaylistID,
+  socketIO
+);
+const room11 = new Room(
+  roomsInfo[10].roomName,
+  roomsInfo[10].spotifyPlaylistID,
+  socketIO
+);
+const room12 = new Room(
+  roomsInfo[11].roomName,
+  roomsInfo[11].spotifyPlaylistID,
+  socketIO
+);
 
-const room1 = new Room(roomsInfo[0].roomName, roomsInfo[0].spotifyPlaylistID, socketIO);
-const room2 = new Room(roomsInfo[1].roomName, roomsInfo[1].spotifyPlaylistID, socketIO);
-const room3 = new Room(roomsInfo[2].roomName, roomsInfo[2].spotifyPlaylistID, socketIO);
-const room4 = new Room(roomsInfo[3].roomName, roomsInfo[3].spotifyPlaylistID, socketIO);
-const room5 = new Room(roomsInfo[4].roomName, roomsInfo[4].spotifyPlaylistID, socketIO);
-const room6 = new Room(roomsInfo[5].roomName, roomsInfo[5].spotifyPlaylistID, socketIO);
-const room7 = new Room(roomsInfo[6].roomName, roomsInfo[6].spotifyPlaylistID, socketIO);
-const room8 = new Room(roomsInfo[7].roomName, roomsInfo[7].spotifyPlaylistID, socketIO);
-const room9 = new Room(roomsInfo[8].roomName, roomsInfo[8].spotifyPlaylistID, socketIO);
-const room10= new Room(roomsInfo[9].roomName, roomsInfo[9].spotifyPlaylistID, socketIO);
-const room11= new Room(roomsInfo[10].roomName, roomsInfo[10].spotifyPlaylistID, socketIO);
-const room12= new Room(roomsInfo[11].roomName, roomsInfo[11].spotifyPlaylistID, socketIO);
+const rooms = [
+  room1,
+  room2,
+  room3,
+  room4,
+  room5,
+  room6,
+  room7,
+  room8,
+  room9,
+  room10,
+  room11,
+  room12,
+];
 
-const rooms = [room1, room2, room3, room4, room5, room6, room7, room8, room9, room10, room11, room12];
+let users = 0;
+
+socketIO.on("connection", (socket) => {
+  console.log(users);
+  console.log("User connected");
+  users++;
+  socketIO.emit("users", users);
+
+  socket.on("newMessage", (message) => {
+    console.log("New message:", message);
+    socketIO.emit("newMessage", {
+      user: socket.id,
+      message: message.message,
+    });
+  });
+
+  socket.on("disconnect", () => {
+    
+    console.log("User disconnected");
+    users--;
+    socketIO.emit("users", users);
+  });
+});
 
 app.get("/", (req, res) => {
   const data = rooms.map((room) => {
