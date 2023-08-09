@@ -93,6 +93,16 @@ const roomsInfo = [
     roomName: "room10",
     spotifyPlaylistID: "0IepDN73Y0GDNBycm63Ewx",
     title: "RULETA ESCOPETA 🔫🥖",
+  },
+  {
+    roomName: "room11",
+    spotifyPlaylistID: "37i9dQZF1DWWMOmoXKqHTD",
+    title: "Songs to Sing in the Car 🚗🎶",
+  },
+  {
+    roomName: "room12",
+    spotifyPlaylistID: "37i9dQZF1DX0BcQWzuB7ZO",
+    title: "Dance Hits 🕺",
   }
 ];
 
@@ -107,8 +117,10 @@ const room7 = new Room(roomsInfo[6].roomName, roomsInfo[6].spotifyPlaylistID, so
 const room8 = new Room(roomsInfo[7].roomName, roomsInfo[7].spotifyPlaylistID, socketIO);
 const room9 = new Room(roomsInfo[8].roomName, roomsInfo[8].spotifyPlaylistID, socketIO);
 const room10= new Room(roomsInfo[9].roomName, roomsInfo[9].spotifyPlaylistID, socketIO);
+const room11= new Room(roomsInfo[10].roomName, roomsInfo[10].spotifyPlaylistID, socketIO);
+const room12= new Room(roomsInfo[11].roomName, roomsInfo[11].spotifyPlaylistID, socketIO);
 
-const rooms = [room1, room2, room3, room4, room5, room6, room7, room8, room9, room10];
+const rooms = [room1, room2, room3, room4, room5, room6, room7, room8, room9, room10, room11, room12];
 
 app.get("/", (req, res) => {
   const data = rooms.map((room) => {
