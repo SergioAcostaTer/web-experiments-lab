@@ -58,8 +58,9 @@ socketIO.on("connection", (socket) => {
   socket.on("newMessage", (message) => {
     console.log("New message:", message);
     socketIO.emit("newMessage", {
-      user: socket.id,
+      id: socket.id,
       message: message.message,
+      user: message.user,
     });
   });
 
