@@ -16,7 +16,6 @@ async function getAudio(name, artists, cover, spotifyDuration) {
     return minutes * 60 + seconds;
   };
 
-
   const differences = searchResults.items.map((object) => {
     if (!object.duration) {
       return Infinity; // Set a high difference for invalid objects
