@@ -16,7 +16,7 @@ app.use(cors());
 
 const socketIO = require("socket.io")(http, {
   cors: {
-    origin: ["https://random-radio-front.vercel.app", "http://localhost:3000"],
+    origin: ["https://random-radio-front.vercel.app", "http://localhost:5173"],
   },
 });
 
