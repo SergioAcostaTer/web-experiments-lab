@@ -45,19 +45,6 @@ class Room {
       
       socket.emit("songDetails", this.musicQueue.song);
 
-      socket.on("skipSong", () => {
-        console.log(`Skipping song in ${this.roomName}`);
-        // this.musicQueue.playNextSong();
-      });
-
-      // socket.on("newMessage", (message) => {
-      //   console.log("New message:", message);
-      //   roomNamespace.emit("newMessage", {
-      //     user: socket.id,
-      //     message: message.message,
-      //   });
-      // });
-
       socket.on("disconnect", () => {});
     });
   }

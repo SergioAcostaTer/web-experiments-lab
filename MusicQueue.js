@@ -1,5 +1,5 @@
 const { getAudio } = require("./services/getAudio");
-const axios = require("axios");
+const { post, get } = require("axios");
 
 class MusicQueue {
   constructor(roomName, spotifyPlaylistID, socketIO) {
@@ -33,7 +33,7 @@ class MusicQueue {
         `${this.clientId}:${this.clientSecret}`
       ).toString("base64");
 
-      const response = await axios.post(
+      const response = await post(
         "https://accounts.spotify.com/api/token",
         "grant_type=client_credentials",
         {
@@ -46,7 +46,7 @@ class MusicQueue {
 
       const spotifyToken = response.data;
 
-      const responseSearch = await axios.get(
+      const responseSearch = await get(
         `https://api.spotify.com/v1/playlists/${this.spotifyPlaylistID}`,
         {
           headers: {
@@ -74,8 +74,10 @@ class MusicQueue {
 
   async loadInitialSongDetails() {
     if (this.queue.length > 0) {
-      await this.loadSong(this.queue[0]);
-      await this.loadSong(this.queue[1]);
+      await Promise.all([
+        this.loadSong(this.queue[0]),
+        this.loadSong(this.queue[1]),
+      ]);
     }
   }
 
@@ -108,9 +110,7 @@ class MusicQueue {
     return this.queue;
   }
 
-
   async loadSongDetailsForNext() {
-    
     this.lastLoadPostion++;
 
     if (this.lastLoadPostion >= this.queue.length) {
@@ -121,7 +121,6 @@ class MusicQueue {
   }
 
   async playNextSong() {
-
     this.songs.shift();
 
     this.socketIO.of(`/${this.roomName}`).emit("songDetails", this.songs[0]);
