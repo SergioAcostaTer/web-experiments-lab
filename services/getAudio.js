@@ -2,7 +2,8 @@ const ytsr = require("sergio-ytsr");
 const { getPaletteFromURL } = require("color-thief-node");
 
 async function getAudio(name, artists, cover, spotifyDuration) {
-  console.time("getAudio");
+  
+  const t0 = Date.now();
 
   const searchResults = await ytsr(`${name} ${artists[0].name}`, {
     limit: 10,
@@ -12,10 +13,9 @@ async function getAudio(name, artists, cover, spotifyDuration) {
 
   const convertToSeconds = (duration) => {
     const [minutes, seconds] = duration.split(":").map(Number);
-    return Math.abs(minutes * 60 + seconds);
+    return minutes * 60 + seconds;
   };
 
-  const spotifyDurationInSeconds = convertToSeconds(spotifyDuration);
 
   const differences = searchResults.items.map((object) => {
     if (!object.duration) {
@@ -23,12 +23,12 @@ async function getAudio(name, artists, cover, spotifyDuration) {
     }
 
     object.duration = convertToSeconds(object.duration);
-    return Math.abs(spotifyDurationInSeconds - object.duration);
+    return Math.abs(spotifyDuration - object.duration);
   });
 
   const indexOfClosest = differences.indexOf(Math.min(...differences));
 
-  const { url } = searchResults.items[indexOfClosest];
+  const { url, duration } = searchResults.items[indexOfClosest];
 
   const palette = await getPaletteFromURL(cover, 3);
 
@@ -40,14 +40,15 @@ async function getAudio(name, artists, cover, spotifyDuration) {
   const audioDetails = {
     name: name,
     artists: artists.map(({ name }) => name),
-    duration: audio.duration,
+    duration: duration,
     cover: cover,
     currentTime: 0,
     colors: colorPalette,
     url: url,
   };
 
-  console.timeEnd("getAudio");
+  const t1 = Date.now();
+  console.log("getAudio took", t1 - t0, "milliseconds");
 
   return audioDetails;
 }
