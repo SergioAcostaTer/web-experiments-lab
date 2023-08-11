@@ -20,6 +20,8 @@ const socketIO = require("socket.io")(http, {
       "http://localhost:5173",
       "http://localhost:3000",
       "http://localhost:4173",
+      "http://spotifyplayer.live",
+      "https://spotifyplayer.live",
     ],
   },
 });
