@@ -13,10 +13,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
-
 const socketIO = require("socket.io")(http, {
   cors: {
-    origin: ["https://random-radio-front.vercel.app", "http://localhost:5173", "http://localhost:3000"],
+    origin: [
+      "https://random-radio-front.vercel.app",
+      "http://localhost:5173",
+      "http://localhost:3000",
+      "http:localhost:4173",
+    ],
   },
 });
 
@@ -36,7 +40,6 @@ for (const roomInfo of roomsInfo) {
   const room = new Room(roomName, spotifyPlaylistID, socketIO);
   rooms.push(room);
 }
-
 
 let users = 0;
 
