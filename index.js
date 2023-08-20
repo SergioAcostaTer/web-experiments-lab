@@ -16,14 +16,7 @@ app.use(cors());
 
 const socketIO = require("socket.io")(http, {
   cors: {
-    origin: [
-      "https://random-radio-front.vercel.app",
-      "http://localhost:5173",
-      "http://localhost:3000",
-      "http://localhost:4173",
-      "http://spotifyplayer.live",
-      "https://spotifyplayer.live",
-    ],
+    origin: "*"
   },
 });
 
@@ -93,6 +86,6 @@ http.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 });
 
-app.listen(PORT, () => {
-  console.log(`Server listening on ${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`Server listening on ${PORT}`);
+// });
