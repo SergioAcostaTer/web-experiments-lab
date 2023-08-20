@@ -92,3 +92,7 @@ app.get("/:room", (req, res) => {
 http.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 });
+
+app.listen(PORT, () => {
+  console.log(`Server listening on ${PORT}`);
+});
