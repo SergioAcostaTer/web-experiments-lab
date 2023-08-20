@@ -7,8 +7,8 @@
     "start": "node index js",
     "dev": "nodemon index js",
     "deploy": "vercel --prod",
-    "logs": "vercel logs radio-back",
-    "vercel-build": "node index js"
+    "logs": "vercel logs radio-back"
+    // "vercel-build": "node index js"
   },
   "author": "",
   "license": "ISC",
